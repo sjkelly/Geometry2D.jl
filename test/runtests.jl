@@ -15,20 +15,20 @@ using PyPlot
 
 
 # test that the constructors for the basic data types work
-reload("test_point")
-reload("test_line")
+include("test_point.jl")
+include("test_line.jl")
 
 # test the various overloaded forms of ccw
-reload("test_ccw")
+include("test_ccw.jl")
 
 # test circles
-reload("test_circle")
+include("test_circle.jl")
 
 # test triangles
-reload("test_triangle")
+include("test_triangle.jl")
 
 # test polygons
-reload("test_poly")
+include("test_poly.jl")
 
 # test the convex hull code
 
