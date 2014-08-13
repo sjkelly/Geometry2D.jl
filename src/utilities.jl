@@ -14,8 +14,8 @@ export ccw, sort, plot
 #   The others are slower, but may be used to create cleaner code where it doesn't
 #   need to be fast, or putting the data into Points would be wasteful (say for an array of points)
 function ccw{T <: Real}(point1::Point{T}, point2::Point{T}, point3::Point{T})
-    v1 = point2 .- point1
-    v2 = point3 .- point2
+    v1 = point2 - point1
+    v2 = point3 - point2
     return v1.x*v2.y - v1.y*v2.x
 end
 ccw{T<:Real,S<:Real,V<:Real}(point1::Point{T}, point2::Point{S}, point3::Point{V}) = ccw(promote(point1,point2,point3)...)
@@ -25,8 +25,8 @@ function ccw{T <: Real}(points::Vector{Point{T}})
     if length(points) != 3
        error("points should be a 3 element vector of points")
     end
-    v1 = points[2] .- points[1]
-    v2 = points[3] .- points[2]
+    v1 = points[2] - points[1]
+    v2 = points[3] - points[2]
     return v1.x*v2.y - v1.y*v2.x
 end
 
@@ -35,9 +35,9 @@ function ccw{T <: Real}(points::Array{Point{T}})
     if size(points,1) != 3
        error("points should be a 3xn array of points")
     end
-    v1 = points[2,:] .- points[1,:]
-    v2 = points[3,:] .- points[2,:]
-    return points_x(v1).*points_y(v2) .- points_y(v1).*points_x(v2)
+    v1 = points[2,:] - points[1,:]
+    v2 = points[3,:] - points[2,:]
+    return points_x(v1).*points_y(v2) - points_y(v1).*points_x(v2)
 end
 
 # Inputs x and y are 3 element vectors providing coordinates for the three points
